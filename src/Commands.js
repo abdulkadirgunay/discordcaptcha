@@ -81,11 +81,6 @@ module.exports = async (message, config, Discord, fs, latestVersion) => {
 					message.channel.send("```js\n// Logs\n\n" + require("util").inspect(await new Handler("GetLogs").request()) + "\n```");
 				}
 				break;
-			case config["commands"]["captchas"].command:
-				if (config["commands"]["captchas"].contributors.includes(message.author.tag) && config["commands"]["captchas"].enabled) {
-					message.channel.send("```js\n// Captchas\n\n" + require("util").inspect(new Handler("GetCaptchas").request()).substr(0, 1999) + "\n```");
-				}
-				break;
 			}
 		}
 	}

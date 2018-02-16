@@ -1,6 +1,6 @@
 {
   "name": "discordcaptcha-master",
-  "version": "2.5.0",
+  "version": "2.4.0",
   "description": "Captcha Verification Bot based on Discord.js",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "y21",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.3"
+    "discord.js": "^11.3.0",
+    "sqlite": "^2.9.1"
   }
 }

@@ -1,7 +1,7 @@
 /**
  * @param {Object} message - The message object
  * @param {array} contrib - Users that are allowed to use that command
-**/
+ **/
 module.exports = (message, contrib) => {
     try {
         if (contrib.includes(message.author.tag)) {

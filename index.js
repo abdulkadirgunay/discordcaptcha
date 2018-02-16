@@ -4,7 +4,7 @@ class Captcha {
      * @param {object} author - The author object (Has to has an id property and should look like <@123456789>)
      */
 	constructor(captcha, author) {
-		this.captcha = captcha;
+		this._captcha = captcha;
 		this.author = author;
 	}
 
@@ -12,20 +12,12 @@ class Captcha {
      * @returns {string} Captcha value of class
      */
 	generate() {
-		let temp = fs.readdirSync("./captchas", callback_);
-		let rand = Math.floor(Math.random() * temp.length);
-		this.captcha = temp[rand];
-		return this.captcha;
+		this._captcha = (Math.random().toString().substr(2)).repeat(2);
+		return this._captcha;
 	}
-	
-	log(){
-		let tempQueryFile = JSON.parse(fs.readFileSync("./src/Query.json", "utf8"));
-		verifylogs[this.author.id] = {
-			inQueue: Date.now(),
-			verifiedAt: false
-		};
-		fs.writeFile("./src/Query.json", JSON.stringify(tempQueryFile), callback_);
-		fs.writeFile("./src/logs.json", JSON.stringify(verifylogs), callback_);
+
+	get captcha(){
+		return this._captcha;
 	}
 }
 // Module Imports and instances
@@ -46,19 +38,9 @@ const callback_ = err => {
 
 let queue = [], latestVersion;
 
-try {
-	snekfetch.get("https://raw.githubusercontent.com/y21/discordcaptcha/master/src/config.json")
-		.then(r => {
-			JSON.parse(r.body).version == config.version ? null : console.log("### A new version of discordcaptcha is available!  (Latest: " + JSON.parse(r.body).version + ")\n\n");
-			latestVersion = JSON.parse(r.body).version;
-		});
-} catch (e) {
-	console.log(e);
-}
-
 client.on("ready", () => {
 	try {
-		console.log("Logged in!");
+		console.log("Logged in as " + client.user.tag + "!");
 		client.user.setActivity(config.streamingGame, {url: config.streamingLink, type: "STREAMING"});
 		client.guilds.size > 1 ? console.log("It looks like this bot is on more than one guild. It is recommended not to have this bot on more than one since it could do random stuff.") : null;
 		client.guilds.forEach(guild => {
@@ -82,14 +64,13 @@ client.on("message", async (message) => {
 				message.author.send(new Discord.RichEmbed()
 					.setTitle("Verification")
 					.setDescription("This guild is protected by discordcaptcha, an open-source verification bot made by y21#0909.")
-					.addField("Instructions", `In a few seconds an image will be sent to you which includes a number. Please send ${config.prefix}verify <captcha> into the channel ${message.channel.name} (${message.channel})`)
+					.addField("Instructions", `In a few seconds a code will be sent to you. Please send ${config.prefix}verify <captcha> into the channel ${message.channel.name} (${message.channel})`)
 					.setColor("RANDOM")
 					.setTimestamp()
-				).catch(e => e.toString().includes("Cannot send messages to this user") ? message.reply("please turn on dms") : null);
-				message.author.send({ files: [new Discord.Attachment(`./captchas/${captcha}`, "captcha.png")] });
-				captchaInstance.log();
-              			sql.run('insert into queries values ("' + message.author.id + '")');
-				message.channel.awaitMessages(msg => msg.content === config.prefix + "verify " + captchaInstance.captcha.substr(0, captchaInstance.captcha.indexOf(".")) && msg.author === message.author, {
+				).catch(e => e.toString().includes("Cannot send messages to this user") ? message.reply("please turn on direct messages") : null);
+				message.author.send("```https\n" + captchaInstance.captcha + "\n```");
+                sql.run('insert into queries values ("' + message.author.id + '")');
+				message.channel.awaitMessages(msg => msg.content === config.prefix + "verify " + captchaInstance.captcha && msg.author === message.author, {
 					max: 1,
 					errors: ["time"]
 				})
