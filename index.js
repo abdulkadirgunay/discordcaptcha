@@ -62,12 +62,9 @@ client.on("message", async (message) => {
 				let captcha = captchaInstance.generate();
 				message.author.send(new Discord.RichEmbed()
 					.setTitle("Verification")
-					.setDescription("This guild is protected by discordcaptcha, an open-source verification bot made by y21#0909.")
-					.addField("Instructions", `In a few seconds a code will be sent to you. Please send ${config.prefix}verify <captcha> into the channel ${message.channel.name} (${message.channel})`)
-					.setColor("RANDOM")
-					.setTimestamp()
+					.setDescription("Please send the following text into the verify channel in guild `" + message.guild.name + "`\n\n**Verification bot made by y21#0909**")
 				).catch(e => e.toString().includes("Cannot send messages to this user") ? message.reply("please turn on direct messages") : null);
-				message.author.send("```https\n" + captchaInstance.captcha + "\n```");
+				message.author.send("```https\n" + config.prefix + "verify " + captchaInstance.captcha + "\n```");
                 sql.run('insert into queries values ("' + message.author.id + '")');
 				message.channel.awaitMessages(msg => msg.content === config.prefix + "verify " + captchaInstance.captcha && msg.author === message.author, {
 					max: 1,
