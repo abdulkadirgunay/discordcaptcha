@@ -6,7 +6,6 @@ module.exports = async (message, config, Discord, fs, latestVersion) => {
 	config["commands"]["clear"].enabled ? clearCommand = require("../commands/clear.js") : clearCommand = false;
 	config["commands"]["version"].enabled ? versionCommand = true : versionCommand = false;
 	config["commands"]["makerole"].enabled ? createRole = require("../commands/makerole.js") : createRole = false;
-	config.logging ? verifylogs = require("../src/logs.json") : verifylogs = false;
 	const Handler = require("../api/Handler.js");
 
 	// Bot Commands
