@@ -1,3 +1,9 @@
+## Warning!
+This branch is deprecated, means that you can still use it, but it has alot of syncing issues and is not up to date.
+Currently i'm planning to use jimp to generate custom captchas and let the user (you) decide **whether to use images or text** as captcha. (You probably came to this branch because of text as captcha)
+
+Look into the <a href="https://github.com/y21/discordcaptcha/projects/1">3.0.0 project page</a> to see the progress.
+
 <img src="https://image.ibb.co/gEN0oR/discord_banner.png"><br/>
 A Captcha verification bot based on Discord.js.
 
