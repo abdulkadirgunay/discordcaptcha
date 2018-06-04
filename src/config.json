@@ -1,47 +1,47 @@
 {
-    "token": "token",
-    "clientid": "clientid",
-    "prefix": "!",
+    "token": "NDUzMjI2NjUyOTQ4ODg5NjIw.Dfbzug.GcyNfqftkTSaKXzFQXE1cFfyLmU",
+    "clientid": "453226652948889620",
+    "prefix": "..",
     "version": "2.5.0",
-    "chat": "main-chat",
-    "userrole": "339841406409375754",
-    "streamingGame": "DiscordCaptcha",
+    "chat": "genel-sohbet",
+    "userrole": "453226977336360960",
+    "streamingGame": "Discord Doğrulama",
     "streamingLink": "https://www.twitch.tv/doxicalswitch",
     "evalAllowed": "true",
-    "ownerid": "312715611413413889",
+    "ownerid": "361222364106588162",
     "logging": true,
     "commands": {
         "blockUser": {
-            "command": "block",
+            "command": "engelle",
             "contributors": [],
             "enabled": true
         },
         "removeBlockFromUser": {
-            "command": "removeBlock",
+            "command": "engelle-",
             "contributors": [],
             "enabled": true
         },
         "banGuildMember": {
-            "command": "ban",
+            "command": "yasakla",
             "contributors": [],
             "enabled": true
         },
         "clear": {
-            "command": "clear",
+            "command": "temizle",
             "contributors": [],
             "enabled": true
         },
         "version": {
-            "command": "version",
+            "command": "sürüm",
             "enabled": true
         },
         "queries": {
-            "command": "queries",
+            "command": "sorgular",
             "enabled": true,
             "contributors": []
         },
         "querydelete": {
-            "command": "querydelete",
+            "command": "sorgular-",
             "enabled": true,
             "contributors": []
         },
@@ -56,17 +56,17 @@
             "contributors": []
         },
         "captchas": {
-            "command": "captchas",
+            "command": "doğrulamalar",
             "enabled": true,
             "contributors": []
         },
         "makerole": {
-            "command": "create-role",
+            "command": "rol-oluştur",
             "enabled": true,
             "contributors": []
         },
         "unverify": {
-            "command": "unverify",
+            "command": "doğrulanmamış",
             "enabled": true
         }
     }
